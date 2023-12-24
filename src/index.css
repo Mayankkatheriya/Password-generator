@@ -8,10 +8,27 @@
 :root {
   --primary-color: #f3f1f1;
   --secondary-color: rgb(27, 27, 27);
-  --text-primary-color: #fff;
+  --text-primary-color: #ffffff;
   --text-secondary-color: #000;
   --extra-color: seagreen;
-  --range-color: #000
+  --range-color: #000;
+  --header-box-shadow: #525050;
+  --main-box-shadow: #525050;
+  --main-box-shadow-secondary: #f7f7f7;
+  --button-text-color: #fff;
+}
+
+:root .dark {
+  --primary-color: rgb(27, 27, 27);
+  --secondary-color: #cac8c8;
+  --text-primary-color: #000000;
+  --text-secondary-color: #e4e2e2;
+  --extra-color: rgb(24, 123, 236);
+  --range-color: #e0dede;
+  --header-box-shadow: #bdbdbd;
+  --main-box-shadow: #c2bcbc;
+  --main-box-shadow-secondary: #525151;
+  --button-text-color: #ffffff;
 }
 body {
   margin: 0;

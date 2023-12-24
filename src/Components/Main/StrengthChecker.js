@@ -2,6 +2,7 @@ import React from "react";
 
 const StrengthChecker = ({ password }) => {
 
+  //TODO func for getting strength
   const getPasswordStrngth = () => {
     let passWordLength = password.length;
     if (passWordLength < 8) {

@@ -1,13 +1,15 @@
+//todo custom hook for generate password
 import { useState } from "react";
-
 const usePassWordGenerator = () => {
     const [password, setPassword] = useState("");
     const [errorMessage, seterrorMessage] = useState("");
 
+    // todo func to generate password 
     const generatePassword = (checkboxData, length) => {
         let charset = "";
         let generatedPassword = ""
 
+        //TODO making new arrays of checked checkboxes
         const selectedOptions = checkboxData.filter((checkbox)=>checkbox.state);
         if(selectedOptions.length === 0){
             seterrorMessage("Please select at least one character type.");
@@ -15,6 +17,7 @@ const usePassWordGenerator = () => {
             return;
         }
 
+        //TODO concat "charset" string according to selectedOptions array
         selectedOptions.forEach(option => {
             switch(option.title) {
                 case 'Include UpperCase Letters':

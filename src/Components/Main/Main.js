@@ -1,49 +1,68 @@
 import React, { useState } from "react";
 import "./Main.css";
-import usePassWordGenerator from "../Hooks/use-password-generator";
-import StrengthChecker from "./StrengthChecker";
+import usePassWordGenerator from "../Hooks/use-password-generator"; //Custom hook for password Generator
+import StrengthChecker from "./StrengthChecker"; //StrengthChecker Componen
+import Button from "./Button"; //Button Component
+import CheckBoxes from "./CheckBoxes"; //CheckBox Component
+
 
 const Main = () => {
+  const { password, errorMessage, generatePassword } = usePassWordGenerator();  // *custom hook
   const [length, setlength] = useState(20);
+  const [copied, setcopied] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const [CheckBoxData, setCheckBoxData] = useState([
     { title: "Include UpperCase Letters", state: false },
     { title: "Include LowerCase Letters", state: false },
     { title: "Include Numbers", state: false },
     { title: "Include Symbols", state: false },
   ]);
-  const [copied, setcopied] = useState(false)
 
+  //Todo Func for checkBox update
   const handleCheckboxChange = (idx) => {
     let updatedData = [...CheckBoxData];
     updatedData[idx].state = !updatedData[idx].state;
     setCheckBoxData(updatedData);
   };
 
-  const handleCopy = (text) => {
-    navigator.clipboard.writeText(text);
-    setcopied(true)
-    
-    setTimeout(()=>{
-        setcopied(false)
-    }, 500)
-  }
+  //Todo Copy button dunction
+  const handleCopy = () => {
+    navigator.clipboard.writeText(password);
+    setcopied(true);
 
-  const { password, errorMessage, generatePassword } = usePassWordGenerator();
+    setTimeout(() => {
+      setcopied(false);
+    }, 500);
+  };
+  //TODO Theme adjust
+  const handleTheme = () => {
+    if (!isDark) document.body.classList.add("dark");
+    else document.body.classList.remove("dark");
+    setIsDark(!isDark);
+  }
 
   return (
     <main>
       <div className="container">
 
+        {/* Toggle Button */}
+        <div className="toggle">
+          <label className="switch">
+            <input type="checkbox" checked = {isDark} onChange={handleTheme}/>
+            <span className="slider round"></span>
+          </label>
+        </div>
+
         {/* PassWord Text And Copy */}
         {password && (
           <div className="password-header">
             <div className="title">{password}</div>
-            <button
-              className="copy-btn"
-              onClick={() => handleCopy(password)}
-            >
-              {copied ? "Copied" : "Copy"}
-            </button>
+
+            <Button
+              customClass="copy-btn"
+              text={copied ? "Copied" : "Copy"}
+              onClick={handleCopy}
+            />
           </div>
         )}
 
@@ -67,35 +86,22 @@ const Main = () => {
         <div className="checkboxes">
           {CheckBoxData.map((item, index) => {
             return (
-              <div key={index}>
-                <input
-                  type="checkbox"
-                  checked={item.state}
-                  onChange={() => {
-                    handleCheckboxChange(index);
-                  }}
-                />
-                <label>{item.title}</label>
-              </div>
+              <CheckBoxes key = {index} title = {item.title} state = {item.state} onClick = {() => {handleCheckboxChange(index)}}/>
             );
           })}
         </div>
-
         {/* {Strength} */}
-        <StrengthChecker password = {password}/>
-
+        <StrengthChecker password={password} />
+        
         {/* Error Handling */}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         {/* Generate button */}
-        <button
-          className="generate-btn"
-          onClick={() => {
-            generatePassword(CheckBoxData, length);
-          }}
-        >
-          Generate Password
-        </button>
+        <Button
+          customClass="copy-btn"
+          text="Generate Password"
+          onClick={() => {generatePassword(CheckBoxData, length)}}
+        />
       </div>
     </main>
   );
