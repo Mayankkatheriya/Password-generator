@@ -20,7 +20,7 @@ main {
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
-  padding: 2.2rem 2rem;
+  padding: 1rem 2rem 2.2rem;
   color: var(--text-primary-color);
   box-shadow: 2px 2px 10px 0 var(--main-box-shadow),
     inset 2px 2px 5px 0 var(--main-box-shadow-secondary);
@@ -200,13 +200,13 @@ input[type="range"]:focus::-ms-fill-upper {
 }
 
 .toggle{
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 20;
+  gap: 1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .switch {
