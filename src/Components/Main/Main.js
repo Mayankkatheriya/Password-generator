@@ -7,7 +7,7 @@ import CheckBoxes from "./CheckBoxes"; //CheckBox Component
 
 const Main = () => {
   // const getTheme = () => {
-  //   const theme = localStorage.getItem("theme")
+  //   const theme = localStorage.getItem("isDark")
   //   return theme ? theme : false
   // }
   const { password, errorMessage, generatePassword } = usePassWordGenerator(); // *custom hook
@@ -42,14 +42,14 @@ const Main = () => {
     if (!isDark) document.body.classList.add("dark");
     else document.body.classList.remove("dark");
     //setting theme in local storage
-    localStorage.setItem("theme", !isDark);
+    localStorage.setItem("isDark", !isDark);
     setIsDark(!isDark);
   };
 
   return (
     <main>
       <div className="container">
-        {/* Toggle Button */}
+        {/* Theme Toggle Button */}
         <div className="toggle">
           {isDark ? (
             //Dark
