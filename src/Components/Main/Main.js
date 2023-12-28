@@ -6,10 +6,6 @@ import Button from "./Button"; //Button Component
 import CheckBoxes from "./CheckBoxes"; //CheckBox Component
 
 const Main = () => {
-  // const getTheme = () => {
-  //   const theme = localStorage.getItem("isDark")
-  //   return theme ? theme : "false"
-  // }
   const { password, errorMessage, generatePassword } = usePassWordGenerator(); // *custom hook
   const [length, setlength] = useState(20);
   const [copied, setcopied] = useState(false);
@@ -20,7 +16,6 @@ const Main = () => {
     { title: "Include Numbers", state: false },
     { title: "Include Symbols", state: false },
   ]);
-
 
   //Todo Func for checkBox update
   const handleCheckboxChange = (idx) => {
@@ -55,7 +50,7 @@ const Main = () => {
 
     // set the initial theme class
     document.body.classList[isDarkLocal ? "add" : "remove"]("dark");
- }, []);
+  }, []);
 
   return (
     <main>
