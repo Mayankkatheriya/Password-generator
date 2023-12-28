@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Main.css";
 import usePassWordGenerator from "../Hooks/use-password-generator"; //Custom hook for password Generator
 import StrengthChecker from "./StrengthChecker"; //StrengthChecker Componen
@@ -8,7 +8,7 @@ import CheckBoxes from "./CheckBoxes"; //CheckBox Component
 const Main = () => {
   // const getTheme = () => {
   //   const theme = localStorage.getItem("isDark")
-  //   return theme ? theme : false
+  //   return theme ? theme : "false"
   // }
   const { password, errorMessage, generatePassword } = usePassWordGenerator(); // *custom hook
   const [length, setlength] = useState(20);
@@ -20,6 +20,7 @@ const Main = () => {
     { title: "Include Numbers", state: false },
     { title: "Include Symbols", state: false },
   ]);
+
 
   //Todo Func for checkBox update
   const handleCheckboxChange = (idx) => {
@@ -45,6 +46,16 @@ const Main = () => {
     localStorage.setItem("isDark", !isDark);
     setIsDark(!isDark);
   };
+  //TODO set Theme when page reload
+  useEffect(() => {
+    // retrieve the theme from local storage
+    console.log("hii");
+    const isDarkLocal = localStorage.getItem("isDark") === "true";
+    setIsDark(isDarkLocal);
+
+    // set the initial theme class
+    document.body.classList[isDarkLocal ? "add" : "remove"]("dark");
+ }, []);
 
   return (
     <main>
