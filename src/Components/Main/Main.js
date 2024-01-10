@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./Main.css";
 import usePassWordGenerator from "../Hooks/use-password-generator"; //Custom hook for password Generator
 import StrengthChecker from "./StrengthChecker"; //StrengthChecker Componen
@@ -6,7 +6,6 @@ import Button from "./Button"; //Button Component
 import CheckBoxes from "./CheckBoxes"; //CheckBox Component
 
 const Main = () => {
-  const { password, errorMessage, generatePassword } = usePassWordGenerator(); // *custom hook
   const [length, setlength] = useState(20);
   const [copied, setcopied] = useState(false);
   const [isDark, setIsDark] = useState(false);
@@ -16,13 +15,17 @@ const Main = () => {
     { title: "Include Numbers", state: false },
     { title: "Include Symbols", state: false },
   ]);
+  const { password, errorMessage, generatePassword } = usePassWordGenerator(); // *custom hook
 
   //Todo Func for checkBox update
-  const handleCheckboxChange = (idx) => {
-    let updatedData = [...CheckBoxData];
-    updatedData[idx].state = !updatedData[idx].state;
-    setCheckBoxData(updatedData);
-  };
+  const handleCheckboxChange = useCallback(
+    (idx) => {
+      let updatedData = [...CheckBoxData];
+      updatedData[idx].state = !updatedData[idx].state;
+      setCheckBoxData(updatedData);
+    },
+    [CheckBoxData]
+  ); // Adding CheckBoxData as a dependency
 
   //Todo Copy button dunction
   const handleCopy = () => {
@@ -35,16 +38,16 @@ const Main = () => {
   };
   //TODO Theme adjust
   const handleTheme = () => {
-    if (!isDark) document.body.classList.add("dark");
-    else document.body.classList.remove("dark");
-    //setting theme in local storage
-    localStorage.setItem("isDark", !isDark);
-    setIsDark(!isDark);
+    setIsDark((prevIsDark) => {
+      const newIsDark = !prevIsDark;
+      document.body.classList[newIsDark ? "add" : "remove"]("dark");
+      localStorage.setItem("isDark", newIsDark);
+      return newIsDark;
+    });
   };
   //TODO set Theme when page reload
   useEffect(() => {
     // retrieve the theme from local storage
-    console.log("hii");
     const isDarkLocal = localStorage.getItem("isDark") === "true";
     setIsDark(isDarkLocal);
 

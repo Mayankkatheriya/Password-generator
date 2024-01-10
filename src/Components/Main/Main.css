@@ -10,7 +10,7 @@ main {
 
 .container {
   width: 100%;
-  max-width: 500px;
+  max-width: 505px;
   min-height: 300px;
   border-radius: 10px;
   background-color: var(--secondary-color);
@@ -24,7 +24,8 @@ main {
   color: var(--text-primary-color);
   box-shadow: 2px 2px 10px 0 var(--main-box-shadow),
     inset 2px 2px 5px 0 var(--main-box-shadow-secondary);
-  position: relative;  
+  position: relative;
+  transition: var(--transition);
 }
 
 .password-header {
@@ -45,6 +46,7 @@ main {
   text-align: center;
   border: 1px dashed var(--text-primary-color);
   word-wrap: break-word;
+  transition: var(--transition);
 }
 
 button {
@@ -56,6 +58,7 @@ button {
   outline: none;
   border-radius: 5px;
   padding: 0.5rem;
+  transition: var(--transition);
   cursor: pointer;
 }
 
@@ -82,6 +85,7 @@ input[type="range"] {
   margin: 10px 0;
   width: 100%;
   background-color: var(--secondary-color);
+  transition: var(--transition);
 }
 input[type="range"]:focus {
   outline: none;
@@ -95,20 +99,24 @@ input[type="range"]::-webkit-slider-runnable-track {
   background: var(--range-color);
   border-radius: 9px;
   border: 2px solid var(--extra-color);
+  transition: var(--transition);
 }
+
 input[type="range"]::-webkit-slider-thumb {
   box-shadow: 3px 3px 1px var(--extra-color);
   border: 1px solid var(--extra-color);
   height: 27px;
   width: 18px;
   border-radius: 8px;
-  background: #ffffff;
+  background: #fff;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -8.5px;
+  transition: var(--transition);
 }
 input[type="range"]:focus::-webkit-slider-runnable-track {
   background: var(--range-color);
+  transition: var(--transition);
 }
 input[type="range"]::-moz-range-track {
   width: 100%;
@@ -119,6 +127,7 @@ input[type="range"]::-moz-range-track {
   background: var(--range-color);
   border-radius: 9px;
   border: 2px solid var(--extra-color);
+  transition: var(--transition);
 }
 input[type="range"]::-moz-range-thumb {
   box-shadow: 3px 3px 1px var(--extra-color);
@@ -128,6 +137,7 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 8px;
   background: #ffffff;
   cursor: pointer;
+  transition: var(--transition);
 }
 input[type="range"]::-ms-track {
   width: 100%;
@@ -137,11 +147,13 @@ input[type="range"]::-ms-track {
   background: transparent;
   border-color: transparent;
   color: transparent;
+  transition: var(--transition);
 }
 input[type="range"]::-ms-fill-lower {
   background: var(--range-color);
   border: 2px solid var(--extra-color);
   border-radius: 18px;
+  transition: var(--transition);
   box-shadow: 2px 2px 3px var(--extra-color);
 }
 input[type="range"]::-ms-fill-upper {
@@ -161,26 +173,42 @@ input[type="range"]::-ms-thumb {
 }
 input[type="range"]:focus::-ms-fill-lower {
   background: var(--range-color);
+  transition: var(--transition);
 }
 input[type="range"]:focus::-ms-fill-upper {
   background: var(--range-color);
+  transition: var(--transition);
 }
 
 .checkboxes {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
+}
+
+.checkboxes label {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.checkboxes label:hover {
+  text-decoration: underline;
 }
 
 .checkboxes div {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.3rem;
 }
 
 .checkboxes input {
     accent-color: var(--extra-color);
-}
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    transition: var(--transition);
+  }
+
 
 .error-message {
   font-size: 16px;
@@ -228,8 +256,7 @@ input[type="range"]:focus::-ms-fill-upper {
   right: 0;
   bottom: 0;
   background-color: var(--extra-color);
-  -webkit-transition: .4s;
-  transition: .4s;
+  transition: var(--transition);
 }
 .slider:before {
   position: absolute;
@@ -240,11 +267,11 @@ input[type="range"]:focus::-ms-fill-upper {
   right: 0;
   bottom: 0;
   background-color: var(--text-primary-color);
-  -webkit-transition: .4s;
-  transition: .4s;
+  transition: var(--transition);
 }
 input:checked + .slider {
   background-color: var(--extra-color);  
+  transition: var(--transition);
 }
 input:focus + .slider {
   box-shadow: 0 0 1px var(--extra-color);
@@ -260,4 +287,10 @@ input:checked + .slider:before {
 }
 .slider.round:before {
   border-radius: 50%;
+}
+
+@media screen and (max-width: 560px) {
+  .checkboxes {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

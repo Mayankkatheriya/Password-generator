@@ -7,8 +7,9 @@ const CheckBoxes = ({title, state, onClick}) => {
       type="checkbox"
       checked={state}
       onChange={onClick}
+      id={title}
     />
-    <label>{title}</label>
+    <label htmlFor={title}>{title}</label>
   </div>
   );
 };

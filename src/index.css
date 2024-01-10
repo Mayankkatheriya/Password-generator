@@ -16,6 +16,7 @@
   --main-box-shadow: #525050;
   --main-box-shadow-secondary: #f7f7f7;
   --button-text-color: #fff;
+  --transition: .3s ease-in-out;
 }
 
 :root .dark {
@@ -29,12 +30,11 @@
   --main-box-shadow: #c2bcbc;
   --main-box-shadow-secondary: #525151;
   --button-text-color: #ffffff;
+  --transition: .3s ease-in-out;
 }
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
